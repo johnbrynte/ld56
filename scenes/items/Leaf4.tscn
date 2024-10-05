@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://de3ggy0mcex7f"]
+
+[ext_resource type="Texture2D" uid="uid://mtfrlmlffypk" path="res://assets/leaf.png" id="1_7ljdy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pgbdy"]
+size = Vector2(466, 15)
+
+[node name="Leaf4" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 27)
+rotation = 0.197598
+texture = ExtResource("1_7ljdy")
+hframes = 2
+vframes = 2
+frame = 3
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(28, 30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -30.5)
+shape = SubResource("RectangleShape2D_pgbdy")
+one_way_collision = true

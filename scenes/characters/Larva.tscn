@@ -1,0 +1,425 @@
+[gd_scene load_steps=36 format=3 uid="uid://b3nxjfwm0ettf"]
+
+[ext_resource type="Script" path="res://scripts/characters/Larva.gd" id="1_ngar2"]
+[ext_resource type="Texture2D" uid="uid://bc8w1ws5fqwom" path="res://assets/larva.png" id="1_w062g"]
+[ext_resource type="Shader" path="res://materials/evolve.gdshader" id="3_2fes0"]
+[ext_resource type="AnimationLibrary" uid="uid://d2cv7rth4l317" path="res://animations/evolve_spin_left.tres" id="4_7aak8"]
+[ext_resource type="Texture2D" uid="uid://jslewtu6v8k2" path="res://assets/evolve.png" id="4_7g0v8"]
+[ext_resource type="AnimationLibrary" uid="uid://pv7d4f7xt4t5" path="res://animations/evolve_spin_right.tres" id="5_ikhnh"]
+[ext_resource type="AudioStream" uid="uid://bgcm1l0awvl7o" path="res://sounds/evolve_loop.ogg" id="6_yje2a"]
+[ext_resource type="AudioStream" uid="uid://bg1elofkbylvm" path="res://sounds/evolve_done.ogg" id="7_sejbl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kqc4s"]
+radius = 25.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ii38v"]
+shader = ExtResource("3_2fes0")
+shader_parameter/multiplierAmount = 0.04
+shader_parameter/opacity = 0.0
+
+[sub_resource type="Animation" id="Animation_why8g"]
+resource_name = "fade_in"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Evolve1:material:shader_parameter/opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_v4c2v"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Evolve1:material:shader_parameter/opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_ohsun"]
+resource_name = "fade_out"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Evolve1:material:shader_parameter/opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yxxmb"]
+_data = {
+"RESET": SubResource("Animation_v4c2v"),
+"fade_in": SubResource("Animation_why8g"),
+"fade_out": SubResource("Animation_ohsun")
+}
+
+[sub_resource type="Animation" id="Animation_utq6y"]
+resource_name = "fade_in"
+length = 0.6
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-80, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.6)
+}
+
+[sub_resource type="Animation" id="Animation_ewf34"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_i8hof"]
+resource_name = "fade_out"
+length = 0.6
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -80, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.6)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_44p8p"]
+_data = {
+"RESET": SubResource("Animation_ewf34"),
+"fade_in": SubResource("Animation_utq6y"),
+"fade_out": SubResource("Animation_i8hof")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oue6e"]
+atlas = ExtResource("1_w062g")
+region = Rect2(512, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3fhq"]
+atlas = ExtResource("1_w062g")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2glpy"]
+atlas = ExtResource("1_w062g")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_64m5r"]
+atlas = ExtResource("1_w062g")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5esy2"]
+atlas = ExtResource("1_w062g")
+region = Rect2(512, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8s7px"]
+atlas = ExtResource("1_w062g")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qbpc1"]
+atlas = ExtResource("1_w062g")
+region = Rect2(256, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypjbr"]
+atlas = ExtResource("1_w062g")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymef4"]
+atlas = ExtResource("1_w062g")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_srble"]
+atlas = ExtResource("1_w062g")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ybkcm"]
+atlas = ExtResource("1_w062g")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sto8t"]
+atlas = ExtResource("1_w062g")
+region = Rect2(768, 256, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nrqo8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oue6e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n3fhq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2glpy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n3fhq")
+}],
+"loop": true,
+"name": &"BIGLARVA_crawl",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_64m5r")
+}],
+"loop": true,
+"name": &"BIGLARVA_default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5esy2")
+}],
+"loop": true,
+"name": &"BIGLARVA_jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8s7px")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qbpc1")
+}],
+"loop": true,
+"name": &"BUTTERFLY_default",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ypjbr")
+}],
+"loop": true,
+"name": &"EGG_default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymef4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_srble")
+}],
+"loop": true,
+"name": &"LARVA_crawl",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ybkcm")
+}],
+"loop": true,
+"name": &"LARVA_default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sto8t")
+}],
+"loop": true,
+"name": &"PUPA_default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_jrxb6"]
+resource_name = "EGG_jump"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -0.0995086, -0.25, 0, 0.25, 0, 0.149995, -0.25, 0, 0.25, 0, -0.121202, -0.25, 0, 0.25, 0, 0.0903893, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.0999997, 0.133333, 0.166666)
+}
+
+[sub_resource type="Animation" id="Animation_7fp1v"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:scale:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_qurac"]
+resource_name = "evolving"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.73, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.73, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.0333333, 1, 2, 3, 4)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0.543475, -0.25, 0, 0.25, 0, 1.02745, -0.25, 0, 0.25, 0, 0.545926, -0.25, 0, 0.25, 0, 1.01274, -0.25, 0, 0.25, 0, 0.544701, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.0333333, 0.6, 1.2, 1.9, 2.66667, 3.3, 4)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u6ur8"]
+_data = {
+"EGG_jump": SubResource("Animation_jrxb6"),
+"RESET": SubResource("Animation_7fp1v"),
+"evolving": SubResource("Animation_qurac")
+}
+
+[node name="Larva" type="CharacterBody2D"]
+script = ExtResource("1_ngar2")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -9)
+rotation = 1.57079
+shape = SubResource("CircleShape2D_kqc4s")
+
+[node name="Evolve" type="Node2D" parent="."]
+
+[node name="Evolve1" type="Sprite2D" parent="Evolve"]
+material = SubResource("ShaderMaterial_ii38v")
+texture = ExtResource("4_7g0v8")
+hframes = 2
+vframes = 2
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Evolve/Evolve1"]
+reset_on_save = false
+libraries = {
+"": ExtResource("5_ikhnh")
+}
+autoplay = "spin_right"
+
+[node name="Evolve2" type="Sprite2D" parent="Evolve"]
+material = SubResource("ShaderMaterial_ii38v")
+texture = ExtResource("4_7g0v8")
+hframes = 2
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Evolve/Evolve2"]
+reset_on_save = false
+libraries = {
+"": ExtResource("4_7aak8")
+}
+autoplay = "spin_left"
+
+[node name="Evolve3" type="Sprite2D" parent="Evolve"]
+material = SubResource("ShaderMaterial_ii38v")
+texture = ExtResource("4_7g0v8")
+hframes = 2
+vframes = 2
+frame = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Evolve/Evolve3"]
+reset_on_save = false
+libraries = {
+"": ExtResource("5_ikhnh")
+}
+autoplay = "spin_right"
+
+[node name="Evolve4" type="Sprite2D" parent="Evolve"]
+material = SubResource("ShaderMaterial_ii38v")
+texture = ExtResource("4_7g0v8")
+hframes = 2
+vframes = 2
+frame = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Evolve/Evolve4"]
+reset_on_save = false
+libraries = {
+"": ExtResource("4_7aak8")
+}
+autoplay = "spin_left"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Evolve"]
+libraries = {
+"": SubResource("AnimationLibrary_yxxmb")
+}
+
+[node name="Sound" type="AudioStreamPlayer" parent="Evolve"]
+stream = ExtResource("6_yje2a")
+parameters/looping = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Evolve/Sound"]
+libraries = {
+"": SubResource("AnimationLibrary_44p8p")
+}
+
+[node name="SoundDone" type="AudioStreamPlayer" parent="Evolve"]
+stream = ExtResource("7_sejbl")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, -1)
+sprite_frames = SubResource("SpriteFrames_nrqo8")
+animation = &"EGG_default"
+offset = Vector2(2, -99)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_u6ur8")
+}

@@ -1,0 +1,223 @@
+[gd_scene load_steps=14 format=3 uid="uid://bm3i0p4yy1jwd"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_4e6j7"]
+[ext_resource type="PackedScene" uid="uid://b3nxjfwm0ettf" path="res://scenes/characters/Larva.tscn" id="1_qvxsy"]
+[ext_resource type="Texture2D" uid="uid://d1okxyhjmmene" path="res://assets/bushes.png" id="2_1oflg"]
+[ext_resource type="Texture2D" uid="uid://d3sokou3y77r5" path="res://assets/sky.png" id="3_5vwtf"]
+[ext_resource type="Texture2D" uid="uid://bc8w1ws5fqwom" path="res://assets/larva.png" id="4_8jydc"]
+[ext_resource type="PackedScene" uid="uid://c50fmodw8ir2w" path="res://scenes/items/Water.tscn" id="5_455gh"]
+[ext_resource type="PackedScene" uid="uid://cnmh5lds2xq3f" path="res://scenes/items/Leaf2.tscn" id="5_kvxmi"]
+[ext_resource type="PackedScene" uid="uid://dq8iyxue41oii" path="res://scenes/items/Leaf3.tscn" id="6_ft0fb"]
+[ext_resource type="PackedScene" uid="uid://de3ggy0mcex7f" path="res://scenes/items/Leaf4.tscn" id="7_fuhpm"]
+[ext_resource type="PackedScene" uid="uid://bld4mn2kk81rk" path="res://scenes/items/Leaf1.tscn" id="7_jxc2j"]
+[ext_resource type="PackedScene" uid="uid://c2ktddhq55t4a" path="res://scenes/GUI.tscn" id="11_i0lsh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xon21"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0.8, 0.017898, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0nouq"]
+size = Vector2(150, 31)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_4e6j7")
+
+[node name="Parallax" type="ParallaxBackground" parent="."]
+scroll_limit_begin = Vector2(0, -2800)
+scroll_limit_end = Vector2(0, 4000)
+
+[node name="SkyLayer" type="ParallaxLayer" parent="Parallax"]
+position = Vector2(0, -640)
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(1024, 0)
+
+[node name="Sky" type="Sprite2D" parent="Parallax/SkyLayer"]
+texture = ExtResource("3_5vwtf")
+centered = false
+
+[node name="Camera" type="Camera2D" parent="."]
+
+[node name="Panel" type="Panel" parent="Camera"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -512.0
+offset_top = -384.0
+offset_right = 512.0
+offset_bottom = 384.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xon21")
+
+[node name="Bushes" type="Node2D" parent="."]
+
+[node name="Bush" type="Sprite2D" parent="Bushes"]
+position = Vector2(263, 480)
+texture = ExtResource("2_1oflg")
+hframes = 2
+vframes = 2
+
+[node name="Bush2" type="Sprite2D" parent="Bushes"]
+position = Vector2(888, 329)
+texture = ExtResource("2_1oflg")
+hframes = 2
+vframes = 2
+frame = 1
+
+[node name="Bush3" type="Sprite2D" parent="Bushes"]
+position = Vector2(815, 473)
+texture = ExtResource("2_1oflg")
+hframes = 2
+vframes = 2
+frame = 2
+
+[node name="Bush4" type="Sprite2D" parent="Bushes"]
+position = Vector2(196, 265)
+texture = ExtResource("2_1oflg")
+hframes = 2
+vframes = 2
+frame = 2
+
+[node name="Trees" type="Node2D" parent="."]
+
+[node name="Tree" type="StaticBody2D" parent="Trees"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Trees/Tree"]
+polygon = PackedVector2Array(374, 401, 469, 384, 620, 405, 783, 381, 950, 333, 790, 402, 673, 422, 716, 453, 824, 474, 712, 474, 633, 448, 470, 446, 364, 497, 200, 567, 121, 675, 92, 876, 173, 1246, 213, 1560, -621, 1551, -616, -489, 319, -489, 171, 42, 145, 232, 201, 355, 283, 387)
+
+[node name="Polygon2D" type="Polygon2D" parent="Trees/Tree"]
+color = Color(0.47, 0.22936, 0.1692, 1)
+polygon = PackedVector2Array(374, 401, 469, 384, 620, 405, 783, 381, 950, 333, 790, 402, 673, 422, 716, 453, 824, 474, 712, 474, 633, 448, 470, 446, 364, 497, 200, 567, 121, 675, 92, 876, 173, 1246, 213, 1560, -621, 1551, -616, -489, 319, -489, 171, 42, 145, 232, 201, 355, 283, 387)
+uv = PackedVector2Array(374, 401, 469, 384, 620, 405, 783, 381, 950, 333, 790, 402, 673, 422, 716, 453, 824, 474, 712, 474, 633, 448, 470, 446, 364, 497, 200, 567, 121, 675, 92, 876, 173, 1246, 213, 1560, -621, 1551, -616, -489, 319, -489, 171, 42, 145, 232, 201, 355, 283, 387)
+
+[node name="Tree2" type="StaticBody2D" parent="Trees"]
+position = Vector2(3035, 0)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Trees/Tree2"]
+position = Vector2(-2320.1, 0)
+polygon = PackedVector2Array(2269, 242, 2214, 331, 2050, 404, 1807, 373, 1655.1, 433, 1645, 529, 1820, 543, 1992, 574, 2128, 641, 2239, 770, 2350, 1337, 2357, 1640, 3432, 1641, 3456, -561, 2212, -537, 2226, -447)
+
+[node name="Polygon2D" type="Polygon2D" parent="Trees/Tree2"]
+position = Vector2(-2320.1, 0)
+color = Color(0.466667, 0.227451, 0.168627, 1)
+polygon = PackedVector2Array(2269, 242, 2214, 331, 2050, 404, 1807, 373, 1728, 260, 1581, 222, 1495, 158, 1543, 229, 1581, 265, 1675, 293, 1703, 345, 1693, 391, 1591, 423, 1447, 402, 1371, 414, 1276, 482, 1226, 482, 1173, 457, 1216, 495, 1250, 503, 1291, 501, 1333, 477, 1317, 517, 1312, 555, 1256, 585, 1236, 576, 1222, 555, 1225, 580, 1239, 599, 1213, 598, 1186, 601, 1212, 607, 1241, 611, 1245, 627, 1227, 649, 1255, 633, 1268, 614, 1263, 601, 1292, 585, 1325, 581, 1347, 604, 1347, 637, 1318, 665, 1358, 646, 1368, 607, 1347, 564, 1347, 533, 1372, 500, 1409, 461, 1474, 467, 1576, 495, 1645, 529, 1650, 564, 1626, 608, 1559, 667, 1435, 742, 1341, 800, 1251, 812, 1191, 795, 1133, 767, 1187, 808, 1245, 826, 1305, 828, 1309, 867, 1299, 887, 1243, 895, 1225, 872, 1236, 911, 1263, 915, 1319, 909, 1349, 878, 1353, 838, 1493, 794, 1623, 732, 1711, 675, 1743, 599, 1820, 543, 1992, 574, 2128, 641, 2239, 770, 2350, 1337, 2357, 1640, 3432, 1641, 3456, -561, 2212, -537, 2226, -447)
+
+[node name="Shadow" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 0.301961)
+polygon = PackedVector2Array(1331, 599, 888, 499, 986, 347, 1358, 296, 1453, 249)
+
+[node name="Sunlight" type="Area2D" parent="."]
+position = Vector2(1425, 750)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sunlight"]
+position = Vector2(-10, 31.5)
+shape = SubResource("RectangleShape2D_0nouq")
+
+[node name="Leaves" type="Node2D" parent="."]
+
+[node name="Leaf1" parent="Leaves" instance=ExtResource("7_jxc2j")]
+modulate = Color(0.677083, 0.677083, 0.677083, 1)
+position = Vector2(1063, 528)
+rotation = 0.206804
+
+[node name="Leaf7" parent="Leaves" instance=ExtResource("7_jxc2j")]
+position = Vector2(2202, 488)
+rotation = -0.32975
+scale = Vector2(-1, 1)
+
+[node name="Leaf2" parent="Leaves" instance=ExtResource("5_kvxmi")]
+position = Vector2(1202, 301)
+rotation = -0.159919
+
+[node name="Leaf4" parent="Leaves" instance=ExtResource("7_fuhpm")]
+position = Vector2(1602, 787)
+rotation = 3.10071
+scale = Vector2(1, -1)
+
+[node name="Leaf3" parent="Leaves" instance=ExtResource("6_ft0fb")]
+position = Vector2(1837, 1001)
+rotation = 2.92387
+scale = Vector2(1, -1)
+
+[node name="Leaf6" parent="Leaves" instance=ExtResource("6_ft0fb")]
+position = Vector2(2100, 740)
+rotation = 0.285745
+scale = Vector2(1, 1)
+
+[node name="Leaf5" parent="Leaves" instance=ExtResource("5_kvxmi")]
+position = Vector2(2211, 822)
+rotation = 2.58895
+scale = Vector2(1, -1)
+
+[node name="Eggs" type="Node2D" parent="."]
+position = Vector2(715, 145)
+
+[node name="Egg" type="Sprite2D" parent="Eggs"]
+position = Vector2(308, 365)
+texture = ExtResource("4_8jydc")
+offset = Vector2(3, -94)
+hframes = 4
+vframes = 4
+frame = 2
+
+[node name="Egg4" type="Sprite2D" parent="Eggs"]
+position = Vector2(402, 378)
+rotation = 1.07158
+texture = ExtResource("4_8jydc")
+offset = Vector2(3, -94)
+hframes = 4
+vframes = 4
+frame = 2
+
+[node name="Egg3" type="Sprite2D" parent="Eggs"]
+position = Vector2(356, 370)
+rotation = -0.179908
+texture = ExtResource("4_8jydc")
+offset = Vector2(3, -94)
+hframes = 4
+vframes = 4
+frame = 2
+
+[node name="Egg2" type="Sprite2D" parent="Eggs"]
+position = Vector2(267, 354)
+rotation = -1.21957
+texture = ExtResource("4_8jydc")
+offset = Vector2(3, -94)
+hframes = 4
+vframes = 4
+frame = 2
+
+[node name="WaterDroplets" type="Node2D" parent="."]
+
+[node name="Water" parent="WaterDroplets" instance=ExtResource("5_455gh")]
+position = Vector2(1668, 759)
+
+[node name="Water2" parent="WaterDroplets" instance=ExtResource("5_455gh")]
+position = Vector2(1762, 753)
+
+[node name="Water4" parent="WaterDroplets" instance=ExtResource("5_455gh")]
+position = Vector2(1644, 1005)
+
+[node name="Water5" parent="WaterDroplets" instance=ExtResource("5_455gh")]
+position = Vector2(2052, 914)
+
+[node name="Water6" parent="WaterDroplets" instance=ExtResource("5_455gh")]
+position = Vector2(1921, 648)
+
+[node name="Water7" parent="WaterDroplets" instance=ExtResource("5_455gh")]
+position = Vector2(1991, 664)
+
+[node name="Larva" parent="." instance=ExtResource("1_qvxsy")]
+position = Vector2(2048, 686)
+evolveState = 2
+
+[node name="GUI" parent="." instance=ExtResource("11_i0lsh")]
+
+[connection signal="body_entered" from="Sunlight" to="." method="_on_sunlight_body_entered"]
